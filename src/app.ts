@@ -1,6 +1,5 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
-import { Request, Response, NextFunction } from 'express';
 import { AuthContext } from './types/types';
 import userRouter from './routes/users';
 import cardRouter from './routes/cards';
@@ -18,24 +17,22 @@ mongoose.connect('mongodb://localhost:27017/mestodb');
 
 app.use((req: Request, res: Response<unknown, AuthContext>, next: NextFunction) => {
   res.locals.user = {
-    _id: '66433ac760a6104bd685d19d' // Это временное решение. Мы захардкодили идентификатор пользователя, поэтому кто бы ни создал карточку, в базе у неё будет один и тот же автор.
+    _id: '66433ac760a6104bd685d19d', // Это временное решение. Мы захардкодили идентификатор пользователя, поэтому кто бы ни создал карточку, в базе у неё будет один и тот же автор.
   };
 
   next();
 });
 
-app.use('/users', userRouter)
-app.use('/cards', cardRouter)
-app.use('/users/me', updateProfileRouter)
-app.use('/cards/:cardId/likes', likesRouter)
-
+app.use('/users', userRouter);
+app.use('/cards', cardRouter);
+app.use('/users/me', updateProfileRouter);
+app.use('/cards/:cardId/likes', likesRouter);
 
 const connect = async () => {
   try {
-    await app.listen(PORT)
-    console.log(`Сервер запущен на ${PORT} порту`)
+    await app.listen(PORT);
   } catch (err) {
-    console.log(err)
+    console.log(err);
   }
-}
+};
 connect();

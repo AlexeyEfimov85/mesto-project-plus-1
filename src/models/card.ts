@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 type TCard = {
   name: string;
@@ -20,7 +20,7 @@ const cardSchema = new mongoose.Schema<TCard>({
     type: String,
     required: true,
   },
-/*   owner: {
+  /*   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user',
     required: true
@@ -40,7 +40,7 @@ const cardSchema = new mongoose.Schema<TCard>({
     type: String,
   },
 }, {
-  timestamps: true  // эта команда на создание полей createdAt и updatedAt
+  timestamps: true, // эта команда на создание полей createdAt и updatedAt
 });
 
 export default mongoose.model<TCard>('card', cardSchema);
